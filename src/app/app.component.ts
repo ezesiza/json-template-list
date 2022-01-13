@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TemplateModel } from './model/template.model';
+import { TemplateService } from './_service/template.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cobiro';
+  appTemplateList: TemplateModel[] =  [];
+
+
+  constructor(private templateService: TemplateService) { }
+
+  ngOnInit() {
+    this.templateService.getTemplateJson().subscribe((items)=>{
+      this.appTemplateList =  items;
+    })
+  }
 }
